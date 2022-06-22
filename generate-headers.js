@@ -6,7 +6,7 @@ import { parse } from 'node-html-parser';
 const __dirname = path.resolve();
 const buildDir = path.join(__dirname, 'build');
 
-const { SENTRY_ORG_ID, SENTRY_KEY, SENTRY_PROJECT_ID } = process.env;
+const { VITE_SENTRY_ORG_ID, VITE_SENTRY_KEY, VITE_SENTRY_PROJECT_ID } = process.env;
 
 function removeCspMeta(inputFile) {
   const fileContents = fs.readFileSync(inputFile, { encoding: 'utf-8' });
@@ -44,12 +44,8 @@ function createHeaders() {
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: accelerometer=(), camera=(), document-domain=(), encrypted-media=(), gyroscope=(), interest-cohort=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), sync-xhr=(), usb=(), xr-spatial-tracking=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Report-To: {"group": "csp-endpoint", "max_age": 10886400, "endpoints": [{"url": "https://o${SENTRY_KEY}.ingest.sentry.io/api/${SENTRY_ORG_ID}/security/?sentry_key=${SENTRY_PROJECT_ID}"}]}
-/manifest.webmanifest
-  Content-Type: application/manifest+json
-/assets/*
-  cache-control: max-age=31536000
-  cache-control: immutable`;
+  Report-To: {"group": "csp-endpoint", "max_age": 10886400, "endpoints": [{"url": "https://o${VITE_SENTRY_KEY}.ingest.sentry.io/api/${VITE_SENTRY_ORG_ID}/security/?sentry_key=${VITE_SENTRY_PROJECT_ID}"}]}
+`;
   const cspArray = [];
   cspMap.forEach((csp, pagePath) =>
     cspArray.push(`${pagePath}\n  Content-Security-Policy: ${csp}`),
