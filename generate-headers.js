@@ -31,7 +31,13 @@ function findCspMeta(startPath, filter = /\.html$/) {
     if (stat.isDirectory()) {
       findCspMeta(filename, filter);
     } else if (filter.test(filename)) {
-      cspMap.set(filename.replace(buildDir, ''), removeCspMeta(filename));
+      cspMap.set(
+        filename
+          .replace(buildDir, '')
+          .replace(/\.html$/, '')
+          .replace(/^\/index$/, '/'),
+        removeCspMeta(filename),
+      );
     }
   });
 }
