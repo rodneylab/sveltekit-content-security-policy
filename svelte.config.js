@@ -3,6 +3,7 @@ import adapter from '@sveltejs/adapter-static';
 import { imagetools } from 'vite-imagetools';
 import { mdsvex } from 'mdsvex';
 import preprocess from 'svelte-preprocess';
+import cspDirectives from './csp-directives.mjs';
 
 const config = {
   extensions: ['.svelte', '.md', '.svelte.md'],
@@ -16,6 +17,10 @@ const config = {
   ],
   kit: {
     adapter: adapter({ precompress: true }),
+    csp: {
+      mode: 'hash',
+      directives: cspDirectives,
+    },
     files: {
       hooks: 'src/hooks',
     },
