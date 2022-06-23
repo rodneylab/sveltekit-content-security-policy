@@ -1,6 +1,8 @@
 {
-  "name": "sveltekit-blog-mdx",
-  "version": "2.0.0",
+  "name": "sveltekit-content-security-policy",
+  "version": "0.0.1",
+  "license": "BSD-3-Clause",
+  "description": "SvelteKit Content Security Policy: how you can add CSP to reduce your Svelte site's cross-site scripting (XSS) attack surface.",
   "scripts": {
     "dev": "svelte-kit dev --port 3030",
     "build": "npm run generate:manifest && svelte-kit build && npm run generate:headers",
@@ -58,10 +60,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rodneylab/sveltekit-blog-mdx"
+    "url": "https://github.com/rodneylab/sveltekit-content-security-policy"
   },
   "bugs": {
-    "url": "https://github.com/rodneylab/sveltekit-blog-mdx/issues"
+    "url": "https://github.com/rodneylab/sveltekit-content-security-policy/issues"
   },
   "type": "module"
 }
