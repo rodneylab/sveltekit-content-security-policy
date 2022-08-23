@@ -1,6 +1,6 @@
-/** @type {import('./index').RequestHandler} */
-export async function get() {
-  const mdModules = await import.meta.glob('../content/blog/**/index.md');
+/** @type {import('./$types').PageLoad} */
+export async function load() {
+  const mdModules = import.meta.glob('../content/blog/**/index.md');
   const posts = await Promise.all(
     Object.keys(mdModules).map(async (path) => {
       const slug = path.split('/').at(-2);
@@ -9,6 +9,5 @@ export async function get() {
       return { datePublished, lastUpdated, postTitle, seoMetaDescription, slug };
     }),
   );
-
-  return { body: { ...{ posts } } };
+  return { posts };
 }
