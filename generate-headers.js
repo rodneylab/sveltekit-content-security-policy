@@ -9,41 +9,41 @@ const buildDir = path.join(__dirname, 'build');
 const { VITE_SENTRY_ORG_ID, VITE_SENTRY_KEY, VITE_SENTRY_PROJECT_ID } = process.env;
 
 function removeCspMeta(inputFile) {
-  const fileContents = fs.readFileSync(inputFile, { encoding: 'utf-8' });
-  const root = parse(fileContents);
-  const element = root.querySelector('head meta[http-equiv="content-security-policy"]');
-  const content = element.getAttribute('content');
-  root.remove(element);
-  return content;
+	const fileContents = fs.readFileSync(inputFile, { encoding: 'utf-8' });
+	const root = parse(fileContents);
+	const element = root.querySelector('head meta[http-equiv="content-security-policy"]');
+	const content = element.getAttribute('content');
+	root.remove(element);
+	return content;
 }
 
 const cspMap = new Map();
 
 function findCspMeta(startPath, filter = /\.html$/) {
-  if (!fs.existsSync(startPath)) {
-    console.error(`Unable to find CSP start path: ${startPath}`);
-    return;
-  }
-  const files = fs.readdirSync(startPath);
-  files.forEach((item) => {
-    const filename = path.join(startPath, item);
-    const stat = fs.lstatSync(filename);
-    if (stat.isDirectory()) {
-      findCspMeta(filename, filter);
-    } else if (filter.test(filename)) {
-      cspMap.set(
-        filename
-          .replace(buildDir, '')
-          .replace(/\.html$/, '')
-          .replace(/^\/index$/, '/'),
-        removeCspMeta(filename),
-      );
-    }
-  });
+	if (!fs.existsSync(startPath)) {
+		console.error(`Unable to find CSP start path: ${startPath}`);
+		return;
+	}
+	const files = fs.readdirSync(startPath);
+	files.forEach((item) => {
+		const filename = path.join(startPath, item);
+		const stat = fs.lstatSync(filename);
+		if (stat.isDirectory()) {
+			findCspMeta(filename, filter);
+		} else if (filter.test(filename)) {
+			cspMap.set(
+				filename
+					.replace(buildDir, '')
+					.replace(/\.html$/, '')
+					.replace(/^\/index$/, '/'),
+				removeCspMeta(filename),
+			);
+		}
+	});
 }
 
 function createHeaders() {
-  const headers = `/*
+	const headers = `/*
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
   X-Content-Type-Options: nosniff
@@ -52,18 +52,18 @@ function createHeaders() {
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Report-To: {"group": "csp-endpoint", "max_age": 10886400, "endpoints": [{"url": "https://o${VITE_SENTRY_KEY}.ingest.sentry.io/api/${VITE_SENTRY_ORG_ID}/security/?sentry_key=${VITE_SENTRY_PROJECT_ID}"}]}
 `;
-  const cspArray = [];
-  cspMap.forEach((csp, pagePath) =>
-    cspArray.push(`${pagePath}\n  Content-Security-Policy: ${csp}`),
-  );
+	const cspArray = [];
+	cspMap.forEach((csp, pagePath) =>
+		cspArray.push(`${pagePath}\n  Content-Security-Policy: ${csp}`),
+	);
 
-  const headersFile = path.join(buildDir, '_headers');
-  fs.writeFileSync(headersFile, `${headers}${cspArray.join('\n')}`);
+	const headersFile = path.join(buildDir, '_headers');
+	fs.writeFileSync(headersFile, `${headers}${cspArray.join('\n')}`);
 }
 
 async function main() {
-  findCspMeta(buildDir);
-  createHeaders();
+	findCspMeta(buildDir);
+	createHeaders();
 }
 
 main();
