@@ -6,7 +6,7 @@
 	import '$lib/styles/index.scss';
 	import BlogPost from '$lib/components/BlogPost.svelte';
 	export let data;
-	// export let page, post, imageData;
+
 	const { page, post, imageData } = data;
 
 	if (browser && !document.lazyloadInstance) {
