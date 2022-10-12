@@ -1,6 +1,6 @@
 <script>
 	import lazyload from 'vanilla-lazyload';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	import '$lib/styles/normalise.css';
 	import '$lib/styles/index.scss';

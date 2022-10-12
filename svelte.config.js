@@ -20,10 +20,6 @@ const config = {
 			mode: 'hash',
 			directives: cspDirectives,
 		},
-		files: {
-			hooks: 'src/hooks',
-		},
-		prerender: { default: true },
 	},
 };
 
