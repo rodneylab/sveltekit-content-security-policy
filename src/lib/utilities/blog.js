@@ -1,9 +1,9 @@
 import { compile } from 'mdsvex';
-import { join, resolve } from 'node:path';
+// import { join, resolve } from 'node:path';
 export const BLOG_PATH = 'src/content/blog';
 
-const __dirname = resolve();
-const location = join(__dirname, BLOG_PATH);
+// const __dirname = resolve();
+// // const location = join(__dirname, BLOG_PATH);
 
 /**
  * Returns array of post slugs
@@ -11,7 +11,7 @@ const location = join(__dirname, BLOG_PATH);
  */
 export async function getSlugs() {
 	try {
-		const posts = await import.meta.glob('../../content/blog/**/index.md');
+		const posts = import.meta.glob('../../content/blog/**/index.md');
 		const slugs = Object.keys(posts).map((element) => {
 			const lastIndex = element.lastIndexOf('/index.md');
 			const firstIndex = element.lastIndexOf('/', lastIndex - 1) + 1;
@@ -29,7 +29,7 @@ export async function getSlugs() {
  */
 export async function getPostsContent() {
 	try {
-		const postFiles = await import.meta.glob('../../content/blog/**/index.md');
+		const postFiles = import.meta.glob('../../content/blog/**/index.md');
 		const postPromises = Object.keys(postFiles).map(async (element) => {
 			await postFiles[element]();
 			const lastIndex = element.lastIndexOf('/index.md');
