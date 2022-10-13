@@ -5,7 +5,7 @@
 	"description": "SvelteKit Content Security Policy: how you can add CSP to reduce your Svelte site's cross-site scripting (XSS) attack surface.",
 	"scripts": {
 		"dev": "vite",
-		"build": "npm run generate:manifest && vite build && npm run generate:headers",
+		"build": "vite build && npm run generate:headers",
 		"preview": "vite preview",
 		"check": "svelte-check --fail-on-hints",
 		"check:watch": "svelte-check --watch",
@@ -26,8 +26,8 @@
 		"@fontsource/source-sans-pro": "^4.5.11",
 		"@iconify/svelte": "^2.2.1",
 		"@rodneylab/sveltekit-components": "1.0.2",
-		"@sveltejs/adapter-static": "^1.0.0-next.44",
-		"@sveltejs/kit": "^1.0.0-next.514",
+		"@sveltejs/adapter-static": "1.0.0-next.44",
+		"@sveltejs/kit": "^1.0.0-next.515",
 		"@types/object-hash": "^2.2.1",
 		"commitlint": "^17.1.2",
 		"dayjs": "^1.11.5",
@@ -41,7 +41,7 @@
 		"mdsvex": "^0.10.6",
 		"node-html-parser": "6.1.1",
 		"object-hash": "^3.0.0",
-		"postcss": "^8.4.17",
+		"postcss": "^8.4.18",
 		"postcss-html": "^1.5.0",
 		"prettier": "~2.7.1",
 		"prettier-plugin-svelte": "^2.8.0",
@@ -56,7 +56,7 @@
 		"svelte-check": "^2.9.2",
 		"svelte-preprocess": "^4.10.7",
 		"vanilla-lazyload": "^17.8.3",
-		"vite": "^3.1.7",
+		"vite": "^3.1.8",
 		"vite-imagetools": "^4.0.11"
 	},
 	"repository": {
