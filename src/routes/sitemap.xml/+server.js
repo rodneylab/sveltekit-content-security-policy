@@ -1,7 +1,5 @@
 import website from '$lib/config/website';
-// import { BLOG_PATH, getPosts, getPostsContent } from '$lib/utilities/blog';
 import { error } from '@sveltejs/kit';
-// import path from 'path';
 
 export const prerender = true;
 
