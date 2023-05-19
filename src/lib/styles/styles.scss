@@ -224,24 +224,8 @@ a:focus {
 	margin-bottom: $spacing-4;
 }
 
-.bio {
-	display: flex;
-	margin-bottom: $spacing-16;
-}
-
 .global-wrapper[data-is-root-path='true'] .bio {
 	margin-bottom: $spacing-20;
-}
-
-.bio p {
-	margin-bottom: $spacing-0;
-}
-
-.bio-avatar {
-	margin-right: $spacing-4;
-	margin-bottom: $spacing-0;
-	min-width: 50px;
-	border-radius: 100%;
 }
 
 .blog-post header h1 {
@@ -280,6 +264,10 @@ figure {
 
 figure figcaption {
 	margin-top: $spacing-2;
+}
+
+img {
+	max-width: $max-width-full;
 }
 
 /* Media queries */
